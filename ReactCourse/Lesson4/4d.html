@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 4A</title>
+  <style>
+    .Information{
+      display: flex;
+      flex-direction: column;
+      width: 220px;
+      float: right;
+    }
+    p{
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 15px;
+    }
+    input{
+      padding: 10px 30px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      border-color: black;
+      border-width: 1px;
+    }
+    button{
+      padding: 10px 12px;
+      border-radius: 10px;
+      background-color: rgb(65, 53, 228);
+      border: none;
+      color: white;
+      margin-right:10px ;
+      cursor: pointer;
+    }
+    .password-button{
+      display: flex;
+    }
+    .hide-button{
+      background-color: blueviolet;
+      margin-left: 5px;
+      
+    }
+  </style>
+ 
+</head>
+<body>
+  <div class="container"></div>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+     
+   
+    function App(){ 
+
+      const [showPassword , setShowPassword]=React.useState(true);
+      function switchType(){
+        if(showPassword){
+          setShowPassword(false)
+        }else{
+          setShowPassword(true)
+        }
+      }
+     
+     
+      
+
+      return (
+        <div className ="Information">
+        <p>Hello, welcome to my Website</p>
+        <input placeholder='Email' />
+        <div className='password-button'>
+        <input placeholder="Password" 
+        type ={showPassword ?"text":"password"}
+        />
+        <button className='hide-button'
+        onClick={switchType}
+        >{showPassword?"Hide":"Show"}</button>
+        </div>
+        
+        <div>
+           <button>Login</button>
+          <button>Sign up</button>
+          
+          </div>
+         
+        </div>
+      )
+    }
+    
+    const container =document.querySelector('.container')
+    ReactDOM.createRoot(container).render(<App />)
+    </script>  
+  
+</body>
+</html>

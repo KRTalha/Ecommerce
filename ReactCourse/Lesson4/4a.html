@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 4A</title>
+  <style>
+    body{
+      background-color: rgb(81, 74, 74);
+    }
+    .on-button{
+      background-color: rgb(25, 135, 84);
+      color: white;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 10px;
+      float: right;
+      cursor: pointer;
+    }
+    .off-button{
+      background-color: rgb(203, 15, 15);
+      color: white;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 10px;
+      float: right;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container"></div>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+     
+   
+    function App(){ 
+      const [isButtonON,setIsButtonON]=React.useState(true);
+      function switchButton(){
+        if(isButtonON){
+          setIsButtonON(false)
+        }else{
+          setIsButtonON(true)
+        }
+      }
+      
+     
+      
+
+      return (
+        <div>
+        <button className={isButtonON?'on-button':'off-button'}
+        onClick={switchButton}
+        >
+        {isButtonON?"On":"OFF"}
+        </button>
+
+          
+        </div>
+      )
+    }
+    
+    const container =document.querySelector('.container')
+    ReactDOM.createRoot(container).render(<App />)
+    </script>  
+  
+</body>
+</html>

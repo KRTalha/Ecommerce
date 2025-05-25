@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 4A</title>
+  <style>
+    .Time-clock{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: large;
+      float: right;
+    }
+  
+  </style>
+ 
+</head>
+<body>
+  <div class="container"></div>
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+     
+   
+    function App(){ 
+      const [currentTime,setCurrentTime] =React.useState(dayjs().format('HH:mm:ss'));
+
+      React.useEffect(()=>{
+        setInterval(()=>{
+          setCurrentTime(dayjs().format('HH:mm:ss'));
+          console.log('Run code');
+          
+        },1000)
+
+        // Important: make sure to give React.useEffect()
+        // a dependency array of [] so it only runs once!
+      },[])  
+
+
+      return (
+      <>
+      <p className="Time-clock">The Current Time is :{currentTime}</p>
+      </>
+      )
+    }
+    
+    const container =document.querySelector('.container')
+    ReactDOM.createRoot(container).render(<App />)
+    </script>  
+  
+</body>
+</html>
