@@ -7,10 +7,17 @@ import { Header } from "../components/Header";
 
 export function OrderPage({ cart }) {
   const [orders, setOrders] = useState([]);
+  // useEffect(() => {
+  //   axios.get("/api/orders?expand=products").then((response) => {
+  //     setOrders(response.data);
+  //   });
+  // }, []);
   useEffect(() => {
-    axios.get("/api/orders?expand=products").then((response) => {
+    const getOrderData = async () => {
+      const response = await axios.get("/api/order?expand=products");
       setOrders(response.data);
-    });
+    };
+    getOrderData();
   }, []);
 
   return (
