@@ -1,5 +1,5 @@
 import { OrderPage } from "./pages/OrderPage";
-import { HomePage } from "./pages/HomePage";
+import { HomePage } from "./pages/home/HomePage";
 import { Checkout } from "./pages/checkout/CheckoutPage";
 import { Tracking } from "./pages/TrackingPage";
 import "./App.css";
