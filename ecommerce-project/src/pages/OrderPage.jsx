@@ -13,11 +13,11 @@ export function OrderPage({ cart }) {
   //   });
   // }, []);
   useEffect(() => {
-    const getOrderData = async () => {
-      const response = await axios.get("/api/order?expand=products");
+    const fetchOrderData = async () => {
+      const response = await axios.get("/api/orders?expand=products");
       setOrders(response.data);
     };
-    getOrderData();
+    fetchOrderData();
   }, []);
 
   return (

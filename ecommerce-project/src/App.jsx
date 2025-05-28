@@ -14,6 +14,13 @@ function App() {
       setCart(response.data);
     });
   }, []);
+  // useEffect(() => {
+  //   const fetchAppData = async () => {
+  //     const response = await axios.get("/api/cart-item?expand=product");
+  //     setCart(response.data);
+  //   };
+  //   fetchAppData();
+  // }, []);
 
   return (
     <Routes>

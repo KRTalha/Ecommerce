@@ -17,20 +17,30 @@ export function Checkout({ cart }) {
   //     setPaymentSummary(response.data);
   //   });
   // }, []);
+  // useEffect(() => {
+  //   const fetchCheckoutData = async () => {
+  //     let response = await axios.get(
+  //       "/api/delivery-options?expand=estimatedDeliveryTime"
+  //     );
+  //     setDeliveryOptions(response.data);
+
+  //     response = await axios.get("/api/payment-summary");
+  //     setPaymentSummary(response.data);
+  //   };
+  //   fetchCheckoutData();
+  // }, []);
 
   useEffect(() => {
     const getChectOutData = async () => {
-      const response = await axios.get(
+      let response = await axios.get(
         "/api/delivery-options?expand=estimatedDeliveryTime"
       );
       setDeliveryOptions(response.data);
-    };
-    const getPaymentSummary = async () => {
-      const response = await axios.get("/api/payment-summary");
+      response = await axios.get("/api/payment-summary");
       setPaymentSummary(response.data);
     };
+
     getChectOutData();
-    getPaymentSummary();
   }, []);
   return (
     <>
