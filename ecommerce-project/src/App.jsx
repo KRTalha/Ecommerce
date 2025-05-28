@@ -1,7 +1,7 @@
-import { OrderPage } from "./pages/OrderPage";
+import { OrderPage } from "./pages/order/OrderPage";
 import { HomePage } from "./pages/home/HomePage";
 import { Checkout } from "./pages/checkout/CheckoutPage";
-import { Tracking } from "./pages/TrackingPage";
+import { Tracking } from "./pages/order/TrackingPage";
 import "./App.css";
 import { Routes, Route } from "react-router";
 import { useEffect, useState } from "react";
