@@ -12,10 +12,10 @@ export function DeliveryOptions({ cartItem, deliveryOptions, loadPage }) {
         }
 
         const upDateDeliveryOption = async () => {
-          axios.put(`/api/cart-items/${cartItem.productId}`, {
+          await axios.put(`/api/cart-items/${cartItem.productId}`, {
             deliveryOptionId: deliveryOption.id,
           });
-          loadPage();
+          await loadPage();
         };
         return (
           <div
