@@ -4,7 +4,7 @@ import { OrderSummary } from "./OrderSummary";
 import { useState, useEffect } from "react";
 import { CheckoutHeader } from "./CheckoutHeader";
 import { PaymentSummary } from "./PaymentSummay";
-export function Checkout({ cart }) {
+export function Checkout({ cart, loadPage }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
   const [paymentSummary, setPaymentSummary] = useState(null);
   // useEffect(() => {
@@ -29,7 +29,7 @@ export function Checkout({ cart }) {
     };
 
     getChectOutData();
-  }, []);
+  }, [cart]);
   return (
     <>
       <link rel="icon" type="image/svg+xml" href="/cart-favicon.png" />
@@ -40,7 +40,11 @@ export function Checkout({ cart }) {
         <div className="page-title">Review your order</div>
 
         <div className="checkout-grid">
-          <OrderSummary cart={cart} deliveryOptions={deliveryOptions} />
+          <OrderSummary
+            cart={cart}
+            deliveryOptions={deliveryOptions}
+            loadPage={loadPage}
+          />
 
           <PaymentSummary paymentSummary={paymentSummary} />
         </div>
