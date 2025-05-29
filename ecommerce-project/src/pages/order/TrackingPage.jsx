@@ -1,11 +1,38 @@
-import { Header } from "../../components/Header";
+// import { Header } from "../../components/Header";
 import "./TrackingPage.css";
+// import dayjs from "dayjs";
+import { Header } from "../../components/Header";
+// import { useParams } from "react-router";
+// import axios from "axios";
+// import { useEffect, useState } from "react";
 
-export function Tracking() {
+export function TrackingPage({ cart }) {
+  // const { orderId, productId } = useParams();
+  // const [order, setOrder] = useState(null);
+
+  // useEffect(() => {
+  //   const fetchTrackingData = async () => {
+  //     const response = await axios.get(
+  //       `/api/orders/${orderId}?expand=products`
+  //     );
+  //     setOrder(response.data);
+  //   };
+
+  //   fetchTrackingData();
+  // }, [orderId]);
+
+  // if (!order) {
+  //   return null;
+  // }
+
+  // const orderProduct = order.products.find((orderProduct) => {
+  //   return orderProduct.productId === productId;
+  // });
   return (
     <>
+      <Header cart={cart} />
       <title>Tracking</title>
-      <Header />
+      <link rel="icon" type="image/svg+xml" href="tracking-favicon.png" />
 
       <div className="tracking-page">
         <div className="order-tracking">
@@ -13,7 +40,10 @@ export function Tracking() {
             View all orders
           </a>
 
-          <div className="delivery-date">Arriving on Monday, June 13</div>
+          <div className="delivery-date">
+            Arriving on
+            {/* {dayjs(orderProduct.estimatedDeliveryTimeMs).format("dddd, MMMM D")} */}
+          </div>
 
           <div className="product-info">
             Black and Gray Athletic Cotton Socks - 6 Pairs

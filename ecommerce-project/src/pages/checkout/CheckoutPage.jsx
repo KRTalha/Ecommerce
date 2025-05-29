@@ -17,18 +17,6 @@ export function Checkout({ cart }) {
   //     setPaymentSummary(response.data);
   //   });
   // }, []);
-  // useEffect(() => {
-  //   const fetchCheckoutData = async () => {
-  //     let response = await axios.get(
-  //       "/api/delivery-options?expand=estimatedDeliveryTime"
-  //     );
-  //     setDeliveryOptions(response.data);
-
-  //     response = await axios.get("/api/payment-summary");
-  //     setPaymentSummary(response.data);
-  //   };
-  //   fetchCheckoutData();
-  // }, []);
 
   useEffect(() => {
     const getChectOutData = async () => {
@@ -47,7 +35,7 @@ export function Checkout({ cart }) {
       <link rel="icon" type="image/svg+xml" href="/cart-favicon.png" />
       <title>Checkout</title>
 
-      <CheckoutHeader />
+      <CheckoutHeader cart={cart} />
       <div className="checkout-page">
         <div className="page-title">Review your order</div>
 
