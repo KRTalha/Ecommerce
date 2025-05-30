@@ -17,19 +17,26 @@ export function Checkout({ cart, loadPage }) {
   //     setPaymentSummary(response.data);
   //   });
   // }, []);
-
   useEffect(() => {
     const getChectOutData = async () => {
-      let response = await axios.get(
+      const response = await axios.get(
         "/api/delivery-options?expand=estimatedDeliveryTime"
       );
       setDeliveryOptions(response.data);
-      response = await axios.get("/api/payment-summary");
+    };
+    getChectOutData();
+  }, []);
+
+  useEffect(() => {
+    const getChectOutData = async () => {
+      const response = await axios.get("/api/payment-summary");
       setPaymentSummary(response.data);
     };
 
     getChectOutData();
   }, [cart]);
+
+  window.axios = axios;
   return (
     <>
       <link rel="icon" type="image/svg+xml" href="/cart-favicon.png" />
