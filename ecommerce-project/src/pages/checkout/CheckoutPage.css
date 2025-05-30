@@ -116,7 +116,14 @@
 }
 
 .checkout-page .product-quantity .link-primary {
-  margin-left: 3px;
+  margin-left: 5px;
+
+ 
+}
+.checkout-page .input-value{
+  width: 30px;
+
+
 }
 
 @media (max-width: 1000px) {
@@ -208,4 +215,7 @@
 
   margin-top: 20px;
   margin-bottom: 19px;
+}
+.CartItemDetails .input-value {
+  width: 20px;
 }
