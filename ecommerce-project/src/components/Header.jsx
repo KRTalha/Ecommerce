@@ -26,7 +26,7 @@ export function Header({ cart }) {
         </div>
 
         <div className="right-section">
-          <NavLink className="orders-NavLink header-NavLink" href="/orders">
+          <NavLink className="orders-NavLink header-NavLink" to="/orders">
             <span className="orders-text">Orders</span>
           </NavLink>
 
