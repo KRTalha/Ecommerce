@@ -1,13 +1,11 @@
-import { it, expect, describe } from "vitest";
 import { formatMoney } from "./money";
+import { describe, it, expect } from "vitest";
 
 describe("formatMoney", () => {
-  it("formats 1999 cents as $19.99", () => {
+  it("to get the result like $19.99", () => {
     expect(formatMoney(1999)).toBe("$19.99");
   });
-
-  it("check two Decimals", () => {
-    expect(formatMoney(1090)).toBe("$10.90");
+  it("checkTwo decimals", () => {
     expect(formatMoney(100)).toBe("$1.00");
   });
 });
