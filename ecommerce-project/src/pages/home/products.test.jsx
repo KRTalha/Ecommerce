@@ -1,9 +1,9 @@
 import { Products } from "./Products";
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi, beforeEach } from "vitest";
 import { userEvent } from "@testing-library/user-event";
 import axios from "axios";
-import { loadESLint } from "eslint";
+
 vi.mock("axios");
 
 // describe("Product component", () => {
@@ -44,8 +44,10 @@ vi.mock("axios");
 // });
 
 describe("Check the Product component", () => {
-  it("Load the component and see the result", () => {
-    const product = {
+  let product;
+  let loadPage;
+  beforeEach(() => {
+    (product = {
       id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
       image: "images/products/intermediate-composite-basketball.jpg",
       name: "Intermediate Size Basketball",
@@ -55,8 +57,10 @@ describe("Check the Product component", () => {
       },
       priceCents: 2095,
       keywords: ["sports", "basketballs"],
-    };
-    const loadPage = vi.fn();
+    }),
+      (loadPage = vi.fn());
+  });
+  it("Load the component and see the result", () => {
     render(<Products product={product} loadPage={loadPage} />);
 
     expect(
@@ -98,18 +102,6 @@ describe("Check the Product component", () => {
   //   expect(loadPage).toHaveBeenCalled();
   // });
   it("Check Add To Cart Button", async () => {
-    const product = {
-      id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-      image: "images/products/intermediate-composite-basketball.jpg",
-      name: "Intermediate Size Basketball",
-      rating: {
-        stars: 4,
-        count: 127,
-      },
-      priceCents: 2095,
-      keywords: ["sports", "basketballs"],
-    };
-    const loadPage = vi.fn();
     render(<Products product={product} loadPage={loadPage} />);
     const user = userEvent.setup();
     const addToCartButton = screen.getByTestId("add-to-cart-button");
