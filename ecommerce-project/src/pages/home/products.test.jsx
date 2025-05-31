@@ -1,6 +1,10 @@
 import { Products } from "./Products";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { userEvent } from "@testing-library/user-event";
+import axios from "axios";
+import { loadESLint } from "eslint";
+vi.mock("axios");
 
 // describe("Product component", () => {
 //   it("displays the product details correctly", () => {
@@ -67,5 +71,54 @@ describe("Check the Product component", () => {
       "images/ratings/rating-40.png"
     );
     expect(screen.getByText("127")).toBeInTheDocument();
+  });
+
+  // it("checking the user Button is working or not", async () => {
+  //   const product = {
+  //     id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+  //     image: "images/products/intermediate-composite-basketball.jpg",
+  //     name: "Intermediate Size Basketball",
+  //     rating: {
+  //       stars: 4,
+  //       count: 127,
+  //     },
+  //     priceCents: 2095,
+  //     keywords: ["sports", "basketballs"],
+  //   };
+  //   const loadPage = vi.fn();
+  //   render(<Products product={product} loadPage={loadPage} />);
+  //   const user = userEvent.setup();
+  //   const addToCartButton = screen.getByTestId("add-to-cart-button");
+  //   await user.click(addToCartButton);
+
+  //   expect(axios.post).toHaveBeenCalledWith("/api/cart-items", {
+  //     productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+  //     quantity: 1,
+  //   });
+  //   expect(loadPage).toHaveBeenCalled();
+  // });
+  it("Check Add To Cart Button", async () => {
+    const product = {
+      id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+      image: "images/products/intermediate-composite-basketball.jpg",
+      name: "Intermediate Size Basketball",
+      rating: {
+        stars: 4,
+        count: 127,
+      },
+      priceCents: 2095,
+      keywords: ["sports", "basketballs"],
+    };
+    const loadPage = vi.fn();
+    render(<Products product={product} loadPage={loadPage} />);
+    const user = userEvent.setup();
+    const addToCartButton = screen.getByTestId("add-to-cart-button");
+    await user.click(addToCartButton);
+
+    expect(axios.post).toHaveBeenCalledWith("/api/cart-items", {
+      productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+      quantity: 1,
+    });
+    expect(loadPage).toHaveBeenCalled();
   });
 });
