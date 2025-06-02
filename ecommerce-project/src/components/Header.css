@@ -39,12 +39,15 @@
 }
 
 .header .logo {
-  height: 26px;
+  height: 46px;
+  width: 70px;
   margin-top: 1px;
+  background-color: green;
 }
 
 .header .mobile-logo {
   display: none;
+
 }
 
 @media (max-width: 675px) {

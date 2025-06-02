@@ -37,6 +37,7 @@ export function Checkout({ cart, loadPage }) {
   }, [cart]);
 
   window.axios = axios;
+  
   return (
     <>
       <link rel="icon" type="image/svg+xml" href="/cart-favicon.png" />
