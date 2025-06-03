@@ -204,3 +204,58 @@
   color: rgb(235, 233, 233);
   
 }
+
+.voice-control-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px; /* Adjust spacing as needed */
+  width: 30px; /* Size of the button */
+  height: 30px; /* Size of the button */
+  color: white; /* Default icon color */
+  transition: color 0.2s ease-in-out;
+}
+
+.voice-control-button:hover {
+  color: #a0f0a0; /* Lighter green on hover */
+}
+
+.voice-control-button.listening-active .microphone-icon {
+  color: #ff0000; /* Red when actively listening */
+  animation: pulse 1s infinite alternate; /* Pulsing animation */
+}
+
+.microphone-icon {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Adjust right-section display to accommodate the new button */
+.header .right-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px; /* Maintain gap between elements */
+  height: 100%;
+}
+
+/* Adjust cart-quantity positioning if needed after adding mic icon */
+.header .cart-quantity {
+  /* You might need to adjust 'right' property based on your layout */
+  right: 10px; /* Example adjustment */
+}

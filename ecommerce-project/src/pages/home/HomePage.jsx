@@ -24,7 +24,7 @@ export function HomePage({ cart, loadPage }) {
 
   return (
     <>
-      <title>Ecommerce Project</title>
+      <title>Tania App</title>
       <link rel="icon" type="image/svg+xml" href="/home-favicon.png" />
       <Header cart={cart} />
       <div className="home-page">
