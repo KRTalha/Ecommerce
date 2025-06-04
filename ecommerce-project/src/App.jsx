@@ -1,11 +1,8 @@
-// ecommerce-project/src/App.jsx
-
 import { OrderPage } from "./pages/order/OrderPage";
 import { HomePage } from "./pages/home/HomePage";
 import { Checkout } from "./pages/checkout/CheckoutPage";
 import { TrackingPage } from "./pages/order/TrackingPage";
-// import { Header } from "./components/Header";
-import { Header } from "./components/Header";
+import { Header } from "./components/Header"; // Ensure Header is imported
 import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useEffect, useState, useCallback } from "react"; // Import useCallback
@@ -20,12 +17,12 @@ function App() {
   const {
     transcript,
     listening,
-    startListening,
+    startListening, // This is the function from the hook
     stopListening,
     error: speechError,
   } = useSpeechRecognition();
 
-  // Wrap loadCart in useCallback
+  // Wrap loadCart in useCallback to prevent unnecessary re-creations
   const loadCart = useCallback(async () => {
     try {
       const response = await axios.get("/api/cart-items?expand=product");
@@ -35,7 +32,7 @@ function App() {
     }
   }, []); // Empty dependency array means it only gets created once
 
-  // Wrap loadProducts in useCallback
+  // Wrap loadProducts in useCallback to prevent unnecessary re-creations
   const loadProducts = useCallback(async () => {
     try {
       const response = await axios.get("/api/products");
@@ -49,31 +46,36 @@ function App() {
   useEffect(() => {
     loadCart();
     loadProducts();
-  }, [loadCart, loadProducts]); // Add loadCart and loadProducts to dependencies
+  }, [loadCart, loadProducts]); // Dependencies ensure this effect re-runs only if loadCart/loadProducts change (which they won't due to useCallback)
 
   // Effect to handle transcribed speech
   useEffect(() => {
     if (transcript) {
       const lowerTranscript = transcript.toLowerCase();
-      console.log("Voice command:", lowerTranscript);
+      console.log("Voice command received:", lowerTranscript); // Log the received command
 
       // --- Navigation Commands ---
       if (
         lowerTranscript.includes("go to home page") ||
         lowerTranscript.includes("go home")
       ) {
+        console.log("Navigating to home page.");
         navigate("/");
-        stopListening();
+        stopListening(); // Stop listening after command is processed
       } else if (
         lowerTranscript.includes("go to checkout page") ||
-        lowerTranscript.includes("go to cart")
+        lowerTranscript.includes("go to cart") ||
+        lowerTranscript.includes("open cart") ||
+        lowerTranscript.includes("open court")
       ) {
+        console.log("Navigating to checkout page.");
         navigate("/checkout");
         stopListening();
       } else if (
-        lowerTranscript.includes("go to orders page") ||
+        lowerTranscript.includes("go to order page") ||
         lowerTranscript.includes("view my orders")
       ) {
+        console.log("Navigating to orders page.");
         navigate("/orders");
         stopListening();
       }
@@ -85,8 +87,9 @@ function App() {
         const productNameMatch = lowerTranscript.match(/add (.*) to cart/);
         if (productNameMatch && productNameMatch[1]) {
           const spokenProductName = productNameMatch[1].trim();
-          console.log("Attempting to add:", spokenProductName);
+          console.log("Attempting to add product:", spokenProductName);
 
+          // Find the product that closely matches the spoken name
           const foundProduct = products.find(
             (p) =>
               p.name.toLowerCase().includes(spokenProductName) ||
@@ -95,26 +98,31 @@ function App() {
 
           if (foundProduct) {
             console.log("Found product:", foundProduct.name);
+            // Assuming quantity 1 for simplicity, can be extended to parse quantity
             axios
               .post("/api/cart-items", {
                 productId: foundProduct.id,
                 quantity: 1,
               })
               .then(() => {
-                loadCart();
-                console.log(`Added ${foundProduct.name} to cart.`);
+                loadCart(); // Reload cart to update quantity in header
+                console.log(`Successfully added ${foundProduct.name} to cart.`);
               })
               .catch((err) => {
                 console.error("Error adding product to cart:", err);
+                // Optionally provide voice feedback: "Failed to add product."
               });
           } else {
             console.log(`Product "${spokenProductName}" not found.`);
+            // Optionally provide voice feedback: "Product not found."
           }
         }
-        stopListening();
+        stopListening(); // Stop listening after command is processed
+      } else {
+        console.log("Unrecognized voice command."); // Log if command is not matched
       }
     }
-  }, [transcript, products, navigate, stopListening, loadCart]);
+  }, [transcript, products, navigate, stopListening, loadCart]); // Dependencies for this effect
 
   return (
     <>
@@ -122,6 +130,7 @@ function App() {
       <title>Ecommerce Project</title>
 
       {/* Header is now OUTSIDE of Routes so it's always rendered and receives props */}
+      {/* FIX: Changed prop name from 'startListening' to 'startVoiceListening' */}
       <Header
         cart={cart}
         startVoiceListening={startListening}
@@ -140,12 +149,15 @@ function App() {
           borderRadius: "8px",
           zIndex: 1001,
           fontSize: "14px",
-          display: listening || speechError ? "block" : "none",
+          display: listening || speechError || transcript ? "block" : "none", // Show if listening, error, or has transcript
         }}
       >
         {listening && "Listening for commands..."}
         {speechError && `Error: ${speechError}`}
-        {transcript && !listening && `Last command: "${transcript}"`}
+        {transcript &&
+          !listening &&
+          !speechError &&
+          `Last command: "${transcript}"`}
       </div>
 
       <Routes>

@@ -1,5 +1,7 @@
+// ecommerce-project/src/pages/home/HomePage.jsx
+
 import axios from "axios";
-import { Header } from "../../components/Header";
+// import { Header } from "../../components/Header"; // REMOVE THIS LINE
 import "./HomePage.css";
 
 import { useEffect, useState } from "react";
@@ -7,12 +9,6 @@ import { ProductsGrid } from "./ProductsGrid";
 
 export function HomePage({ cart, loadPage }) {
   const [products, setProducts] = useState([]);
-
-  // useEffect(() => {
-  //   axios.get("/api/products").then((response) => {
-  //     setProducts(response.data);
-  //   });
-  // }, []);
 
   useEffect(() => {
     const getHomeData = async () => {
@@ -24,9 +20,8 @@ export function HomePage({ cart, loadPage }) {
 
   return (
     <>
-      <title>Tania App</title>
-      <link rel="icon" type="image/svg+xml" href="/home-favicon.png" />
-      <Header cart={cart} />
+      {/* REMOVED <title> and <link rel="icon"> from here, as App.jsx handles global metadata */}
+      {/* REMOVED <Header cart={cart} /> from here */}
       <div className="home-page">
         <ProductsGrid products={products} loadPage={loadPage} cart={cart} />
       </div>

@@ -1,12 +1,16 @@
-// import { Header } from "../../components/Header";
+// ecommerce-project/src/pages/order/TrackingPage.jsx
+
+// import { Header } from "../../components/Header"; // REMOVE THIS LINE
 import "./TrackingPage.css";
 // import dayjs from "dayjs";
-import { Header } from "../../components/Header";
+// import { Header } from "../../components/Header"; // REMOVE THIS LINE (duplicate)
 // import { useParams } from "react-router";
 // import axios from "axios";
 // import { useEffect, useState } from "react";
 
 export function TrackingPage({ cart }) {
+  // The commented-out code below was likely from an earlier version or example.
+  // We're removing it to ensure a clean slate and avoid conflicts.
   // const { orderId, productId } = useParams();
   // const [order, setOrder] = useState(null);
 
@@ -28,11 +32,11 @@ export function TrackingPage({ cart }) {
   // const orderProduct = order.products.find((orderProduct) => {
   //   return orderProduct.productId === productId;
   // });
+
   return (
     <>
-      <Header cart={cart} />
-      <title>Tracking</title>
-      <link rel="icon" type="image/svg+xml" href="tracking-favicon.png" />
+      {/* REMOVED <Header cart={cart} /> from here */}
+      {/* REMOVED <title> and <link rel="icon"> from here, as App.jsx handles global metadata */}
 
       <div className="tracking-page">
         <div className="order-tracking">
@@ -54,6 +58,7 @@ export function TrackingPage({ cart }) {
           <img
             className="product-image"
             src="images/products/athletic-cotton-socks-6-pairs.jpg"
+            alt="Product Image"
           />
 
           <div className="progress-labels-container">

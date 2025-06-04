@@ -2,9 +2,10 @@
 
 import "./Header.css";
 import { NavLink } from "react-router-dom"; // Use react-router-dom for NavLink
-
+import PropTypes from "prop-types";
 export function Header({ cart, startVoiceListening, isVoiceListening }) {
   let totalQuantity = 0;
+  console.log("Header props:", { startVoiceListening, isVoiceListening });
 
   cart.forEach((cartItem) => {
     totalQuantity += cartItem.quantity;
@@ -81,3 +82,9 @@ export function Header({ cart, startVoiceListening, isVoiceListening }) {
     </>
   );
 }
+
+Header.propTypes = {
+  cart: PropTypes.array.isRequired,
+  startListening: PropTypes.func.isRequired,
+  isVoiceListening: PropTypes.bool.isRequired,
+};

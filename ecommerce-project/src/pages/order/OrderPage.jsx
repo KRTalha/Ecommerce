@@ -1,8 +1,10 @@
+// ecommerce-project/src/pages/order/OrderPage.jsx
+
 import "./OrdersPage.css";
 import axios from "axios";
 
 import { useEffect, useState } from "react";
-import { Header } from "../../components/Header";
+// import { Header } from "../../components/Header"; // REMOVE THIS LINE
 import { OrderGrid } from "./OrderGrid";
 
 export function OrderPage({ cart, loadPage }) {
@@ -12,19 +14,11 @@ export function OrderPage({ cart, loadPage }) {
       setOrders(response.data);
     });
   }, []);
-  // useEffect(() => {
-  //   const fetchOrderData = async () => {
-  //     const response = await axios.get("/api/orders?expand=products");
-  //     setOrders(response.data);
-  //   };
-  //   fetchOrderData();
-  // }, []);
 
   return (
     <>
-      <title>Orders</title>
-      <link rel="icon" type="image/svg+xml" href="/orders-favicon.png" />
-      <Header cart={cart} />
+      {/* REMOVED <title> and <link rel="icon"> from here, as App.jsx handles global metadata */}
+      {/* REMOVED <Header cart={cart} /> from here */}
 
       <div className="orders-page">
         <div className="page-title">Your Orders</div>
