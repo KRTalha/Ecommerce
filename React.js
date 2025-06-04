@@ -153,4 +153,43 @@
 //useContext()
 //use()
 
-console.log('hi');
+// console.log('hi');
+
+//there are 4 types of requests from the backend
+//1 GET = get some data
+//2 POST = create some data
+//3 PUT = Update some Data
+// DELETE = Delete Some data
+
+
+
+// Testing the functions
+// When we test the function we run the function e.g
+//expect(formatMoney(1999)).toBe('$19.99)
+
+//Testing a component 
+// When we test the component we actually render the component :
+// e.g 
+// rendee(<Product />)
+// render = display the component on the Page
+
+
+// what render do?
+
+// it Actually render a component in a fake web page.
+
+
+// In our test , we should not contact a real beackend bacause the backend might not be available during test
+// In out test might accidently update the backend (real Data) so best practise is to mode the test
+
+// What is mock
+// Mock actually create a fake version of a function
+
+//What are test Hook
+// There are some important test hooks
+// 1. beforeEach
+//2 . afterEach
+//3 beforeAll
+//4 afterAll
+
+//Before each runs before running the test so if we save something inside the beforeEact so it will be created again
