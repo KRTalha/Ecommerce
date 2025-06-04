@@ -8,8 +8,12 @@ export function CartItemDetails({ cartItem, loadPage }) {
     await axios.delete(`/api/cart-items/${cartItem.productId}`);
     await loadPage();
   };
-  const updateQuantity = () => {
+  const updateQuantity = async () => {
     if (isUpdatingQuantity) {
+      await axios.put(`/api/cart-items/${cartItem.productId}`, {
+        quantity: Number(quantity),
+      });
+      await loadPage();
       setIsUpdatingQuantity(false);
     } else {
       setIsUpdatingQuantity(true);
