@@ -1,5 +1,5 @@
 import "./CheckoutHeader.css";
-import { Link } from "react-router";
+import { Link } from "react-router-dom"; // Updated to react-router-dom
 export function CheckoutHeader({ cart }) {
   let totalQuantity = 0;
 
@@ -12,16 +12,28 @@ export function CheckoutHeader({ cart }) {
         <div className="header-content">
           <div className="checkout-header-left-section">
             <Link to="/">
-              <img className="logo" src="images/UELogo.png" />
-              <img className="mobile-logo" src="images/mobile-logo.png" />
+              <img
+                className="logo"
+                src="/images/UELogo.png"
+                alt="Website Logo"
+              />{" "}
+              {/* Updated logo path */}
+              <img
+                className="mobile-logo"
+                src="/images/UELogo.png"
+                alt="Mobile Logo"
+              />{" "}
+              {/* Updated mobile logo path */}
             </Link>
           </div>
 
           <div className="checkout-header-middle-section">
             Checkout (
-            <a className="return-to-home-link" href="/">
+            <Link className="return-to-home-link" to="/">
+              {" "}
+              {/* Changed to Link for consistent routing */}
               {totalQuantity} items
-            </a>
+            </Link>
             )
           </div>
 

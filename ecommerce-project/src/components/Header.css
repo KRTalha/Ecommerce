@@ -1,22 +1,22 @@
 .header {
-  background-color: rgb(8, 79, 45);
+  background-color: #2c3e50;
   color: white;
-  padding-left: 15px;
-  padding-right: 15px;
-
+  padding-left: 20px;
+  padding-right: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  height: 70px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
 
 .header .left-section {
-  width: 208px;
+  width: 200px;
 }
 
 @media (max-width: 800px) {
@@ -27,140 +27,121 @@
 
 .header .header-link {
   display: inline-block;
-  padding: 6px 9.5px;
-  border-radius: 2px;
+  padding: 8px 12px;
+  border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
-  border: 1px solid rgba(0, 0, 0, 0);
+  border: 1px solid transparent;
+  transition: border-color 0.2s, background-color 0.2s;
 }
 
 .header .header-link:hover {
-  border: 1px solid white;
+  border: 1px solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Updated .logo to use content property for the image */
 .header .logo {
-  height: 46px;
-  width: 70px;
-  margin-top: 1px;
-  background-color: green;
+  height: 30px;
+  margin-top: 0;
+  content: url('/images/UELogo.png'); /* Path to your logo in the public folder */
+  display: block; /* Ensure it behaves like a block element */
+  object-fit: contain; /* Ensure the image scales properly */
 }
 
+/* Base style for mobile-logo, initially hidden by default */
 .header .mobile-logo {
   display: none;
-
+  height: auto;
+  margin-top: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white; /* Ensure text is visible */
 }
 
 @media (max-width: 675px) {
   .header .logo {
-    display: none;
+    display: none; /* Hide the image logo on smaller screens */
   }
 
   .header .mobile-logo {
-    display: block;
-    height: 26px;
-    margin-top: 1px;
+    display: block; /* Show the mobile logo (text) */
+  }
+
+  .header .mobile-logo::before {
+    content: "Talha"; /* Display your name as the mobile logo */
   }
 }
 
 .header .middle-section {
   flex: 1;
-  max-width: 850px;
-  margin-left: 10px;
-  margin-right: 10px;
+  max-width: 700px;
+  margin-left: 20px;
+  margin-right: 20px;
   display: flex;
+  align-items: center;
 }
 
 .header .search-bar {
   flex: 1;
   width: 0;
   font-size: 16px;
-  height: 38px;
+  height: 40px;
   padding-left: 15px;
-  border: none;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  border: 1px solid #ddd;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.header .search-bar:focus {
+  border-color: #007bff;
 }
 
 .header .search-button {
-  background-color: rgb(186, 255, 190);
-  border: none;
-  width: 45px;
-  height: 40px;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  background-color: #4CAF50;
+  width: 50px;
+  height: 42px;
+  border-radius: 0 5px 5px 0;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header .search-button:hover {
+  background-color: #45a049;
 }
 
 .header .search-icon {
-  height: 20px;
-  margin-left: 0px;
-  margin-top: 3px;
+  height: 22px;
+  filter: invert(1);
 }
 
-/* .header .right-section {
-  width: 200px;
-  flex-shrink: 0;
- 
-
-  display: flex;
-  justify-content: end;
-  align-items: center;
-}
-
-.header .orders-link {
-  color: rgb(109, 39, 39);
-
-  display: flex;
-  align-items: center;
-  padding-left: 13px;
-  padding-right: 13px;
-}
-
-.header .orders-text {
-  display: block;
-  font-size: 15px;
-  font-weight: 700;
-  color: rgb(204, 156, 156);
-  
-}
-
-
-.header .cart-link {
-  color: white;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.header .cart-icon {
-  width: 38px;
-  /* margin-right: 27px;
-  margin-top: 8px;
-  } */
-
-  
 .header .right-section {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 20px;
-  height: 100%; /* ensure it fills the header's height */
+  gap: 25px;
+  height: 100%;
 }
 
 .header .orders-NavLink {
-  color: rgb(109, 39, 39);
-  font-weight: 700;
-  font-size: 15px;
+  color: #e0e0e0;
+  font-weight: 500;
+  font-size: 16px;
   text-decoration: none;
+}
+
+.header .orders-NavLink:hover {
+  color: #ffffff;
 }
 
 .header .cart-NavLink {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: white;
+  color: #ffffff;
   text-decoration: none;
   position: relative;
 }
@@ -173,89 +154,52 @@
 }
 
 .header .cart-icon {
-  width: 30px;
+  width: 32px;
 }
 
 .header .cart-quantity {
   position: absolute;
-  top: 2px;
-  right: 40px;
-  background-color: white;
-  color: rgb(8, 79, 45);
-  font-size: 12px;
+  top: -5px;
+  right: -10px;
+  background-color: #ff5722;
+  color: white;
+  font-size: 14px;
   font-weight: 700;
-  width: 18px;
-  height: 12px;
- 
+  min-width: 22px;
+  height: 22px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2px;
 }
 
 .header .cart-text {
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .header .orders-text {
   display: block;
-  font-size: 15px;
-  font-weight: 700;
-  color: rgb(235, 233, 233);
-  
+  font-size: 16px;
+  font-weight: 500;
+  color: #e0e0e0;
 }
 
-.voice-control-button {
-  background: none;
-  border: none;
+.voice-search-button {
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: white;
   cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 15px; /* Adjust spacing as needed */
-  width: 30px; /* Size of the button */
-  height: 30px; /* Size of the button */
-  color: white; /* Default icon color */
-  transition: color 0.2s ease-in-out;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
-.voice-control-button:hover {
-  color: #a0f0a0; /* Lighter green on hover */
+.voice-search-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.voice-control-button.listening-active .microphone-icon {
-  color: #ff0000; /* Red when actively listening */
-  animation: pulse 1s infinite alternate; /* Pulsing animation */
-}
-
-.microphone-icon {
-  width: 100%;
-  height: 100%;
-}
-
-@keyframes pulse {
-  from {
-    transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
-}
-
-/* Adjust right-section display to accommodate the new button */
-.header .right-section {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 20px; /* Maintain gap between elements */
-  height: 100%;
-}
-
-/* Adjust cart-quantity positioning if needed after adding mic icon */
-.header .cart-quantity {
-  /* You might need to adjust 'right' property based on your layout */
-  right: 10px; /* Example adjustment */
+.voice-search-button:active {
+  background-color: rgba(255, 255, 255, 0.2);
 }
