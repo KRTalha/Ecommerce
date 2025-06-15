@@ -5,15 +5,28 @@ import "./HomePage.css";
 import { useEffect, useState } from "react";
 import { ProductsGrid } from "./ProductsGrid";
 
-export function HomePage({ cart, loadPage, voiceCommand, setVoiceCommand }) {
-  // Receive voiceCommand and setVoiceCommand
+// Receive new props for search control, and original props
+export function HomePage({
+  cart,
+  loadPage,
+  currentSearchTerm,
+  searchActionTrigger,
+  isListening,
+  toggleListening,
+  handleManualSearch,
+}) {
   const [products, setProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(""); // State for search term
 
+  // This useEffect now depends on currentSearchTerm AND searchActionTrigger
+  // This ensures that even if currentSearchTerm is the same,
+  // incrementing searchActionTrigger will force a re-fetch.
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const query = searchTerm ? `?search=${searchTerm}` : "";
+        const query = currentSearchTerm
+          ? `?search=${encodeURIComponent(currentSearchTerm)}`
+          : "";
+        console.log("Fetching products with query:", query); // Debugging line
         const response = await axios.get(`api/products${query}`);
         setProducts(response.data);
       } catch (error) {
@@ -21,32 +34,26 @@ export function HomePage({ cart, loadPage, voiceCommand, setVoiceCommand }) {
       }
     };
     fetchProducts();
-  }, [searchTerm]); // Re-fetch products when searchTerm changes
-
-  // Effect to handle voice commands
-  useEffect(() => {
-    if (voiceCommand) {
-      // Example: "search for basketball"
-      if (voiceCommand.startsWith("search for ")) {
-        const query = voiceCommand.replace("search for ", "").trim();
-        setSearchTerm(query); // Set the search term based on voice command
-      } else if (voiceCommand.includes("show all products")) {
-        setSearchTerm(""); // Clear search to show all products
-      }
-      // Clear the voice command after it's processed
-      setVoiceCommand(null);
-    }
-  }, [voiceCommand, setVoiceCommand]);
+  }, [currentSearchTerm, searchActionTrigger]); // Dependencies include searchActionTrigger
 
   return (
     <>
       <title>Ecommerce Project</title>
       <link rel="icon" type="image/svg+xml" href="/home-favicon.png" />
-      <Header cart={cart} onVoiceCommand={setVoiceCommand} />{" "}
-      {/* Pass setVoiceCommand to Header */}
+      {/* Pass all necessary props to Header */}
+      <Header
+        cart={cart}
+        isListening={isListening}
+        toggleListening={toggleListening}
+        currentSearchTerm={currentSearchTerm}
+        handleManualSearch={handleManualSearch}
+      />
       <div className="home-page">
         <div className="search-results-info">
-          {searchTerm && <p>Showing results for: "{searchTerm}"</p>}
+          {currentSearchTerm && (
+            <p>Showing results for: "{currentSearchTerm}"</p>
+          )}
+          {!currentSearchTerm && <p>Displaying all products.</p>}
         </div>
         <ProductsGrid products={products} loadPage={loadPage} cart={cart} />
       </div>

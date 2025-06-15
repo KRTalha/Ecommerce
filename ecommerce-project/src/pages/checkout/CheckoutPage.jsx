@@ -1,40 +1,62 @@
-// ecommerce-project/src/pages/checkout/CheckoutPage.jsx
-
 import "./CheckoutPage.css";
 import axios from "axios";
 import { OrderSummary } from "./OrderSummary";
 import { useState, useEffect } from "react";
-// import { CheckoutHeader } from "./CheckoutHeader"; // REMOVE THIS LINE
+// Correctly importing CheckoutHeader as a named import
+import { CheckoutHeader } from "./CheckoutHeader";
 import { PaymentSummary } from "./PaymentSummay";
 
-export function Checkout({ cart, loadPage }) {
+export function Checkout({
+  cart,
+  loadPage,
+  isListening,
+  toggleListening,
+  handleManualSearch,
+}) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
   const [paymentSummary, setPaymentSummary] = useState(null);
 
   useEffect(() => {
     const getChectOutData = async () => {
-      const response = await axios.get(
-        "/api/delivery-options?expand=estimatedDeliveryTime"
-      );
-      setDeliveryOptions(response.data);
+      try {
+        const response = await axios.get(
+          "/api/delivery-options?expand=estimatedDeliveryTime"
+        );
+        setDeliveryOptions(response.data);
+      } catch (error) {
+        console.error("Error fetching delivery options:", error);
+        setDeliveryOptions([]);
+      }
     };
     getChectOutData();
   }, []);
 
   useEffect(() => {
-    const getChectOutData = async () => {
-      const response = await axios.get("/api/payment-summary");
-      setPaymentSummary(response.data);
+    const getPaymentSummary = async () => {
+      try {
+        const response = await axios.get("/api/payment-summary");
+        setPaymentSummary(response.data);
+      } catch (error) {
+        console.error("Error fetching payment summary:", error);
+        setPaymentSummary(null);
+      }
     };
-
-    getChectOutData();
+    getPaymentSummary();
   }, [cart]);
 
   window.axios = axios;
+
   return (
     <>
-      {/* REMOVED <link rel="icon"> and <title> from here, as App.jsx handles global metadata */}
-      {/* REMOVED <CheckoutHeader cart={cart} /> from here */}
+      <link rel="icon" type="image/svg+xml" href="/cart-favicon.png" />
+      <title>Checkout</title>
+
+      <CheckoutHeader
+        cart={cart}
+        isListening={isListening}
+        toggleListening={toggleListening}
+        handleManualSearch={handleManualSearch}
+      />
       <div className="checkout-page">
         <div className="page-title">Review your order</div>
 
